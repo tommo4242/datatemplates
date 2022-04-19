@@ -371,6 +371,71 @@ class DataTemplateImportModule(DataTemplateBase):
     loader = staticmethod(loaders.load_import_module)
 
 
+class DataTemplateJira(DataTemplateBase):
+    """
+    .. rst:directive:: .. datatemplate:jira:: url
+
+        Query a Jira server at ``url`` via :py:func:`jira.search_issues`
+        and render using ``template`` given in directive body.
+
+        .. rst:directive:option:: template: template name, optional
+
+            The name of a template file on the Sphinx template search path.
+            Overrides directive body.
+
+        .. rst:directive:option:: auth: authentication token
+
+                The token used to access the server.
+
+        .. rst:directive:option:: query: JQL query
+
+                The query used to select issues from the data source.
+    """
+
+    option_spec = defaultdict(
+        unchanged_factory, DataTemplateBase.option_spec, **{
+            'auth': rst.directives.unchanged_required,
+            'query': rst.directives.unchanged_required,
+        })
+
+    loader = staticmethod(loaders.load_jira)
+
+
+class DataTemplateJama(DataTemplateBase):
+    """
+    .. rst:directive:: .. datatemplate:jama:: url
+
+        Query a Jama server at ``url`` via :py:func:`jama_export.snapshot`
+        and render using ``template`` given in directive body.
+
+        .. rst:directive:option:: template: template name, optional
+
+            The name of a template file on the Sphinx template search path.
+            Overrides directive body.
+
+        .. rst:directive:option:: auth: authentication token
+
+                The token used to access the server.
+
+        .. rst:directive:option:: project: Jama project API identifier
+
+                The API id used to define the Jama project.
+
+        .. rst:directive:option:: query: Document Key
+
+                The document key of the start point in the project to extract.
+    """
+
+    option_spec = defaultdict(
+        unchanged_factory, DataTemplateBase.option_spec, **{
+            'project': rst.directives.unchanged_required,
+            'auth': rst.directives.unchanged_required,
+            'query': rst.directives.unchanged_required,
+        })
+
+    loader = staticmethod(loaders.load_jama)
+
+
 class DataTemplateLegacy(rst.Directive):
 
     option_spec = {

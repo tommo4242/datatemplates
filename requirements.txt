@@ -6,3 +6,8 @@ Sphinx
 PyYAML
 defusedxml
 sphinxcontrib-runcmd
+jira
+treelib
+bs4
+lxml
+py_jama_rest_client

@@ -13,6 +13,8 @@ class DataTemplateDomain(Domain):
         'csv': directive.DataTemplateCSV,
         'xml': directive.DataTemplateXML,
         'dbm': directive.DataTemplateDBM,
+        'jira': directive.DataTemplateJira,
+        'jama': directive.DataTemplateJama,
         'import-module': directive.DataTemplateImportModule,
     }
 

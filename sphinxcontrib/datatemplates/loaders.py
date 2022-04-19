@@ -7,6 +7,9 @@ import json
 import mimetypes
 import pathlib
 import yaml
+import jira
+from sphinxcontrib.datatemplates import jama_export
+from urllib import parse
 
 registered_loaders = []
 
@@ -147,3 +150,20 @@ def load_dbm(source, absolute_resolved_path, **options):
 @contextlib.contextmanager
 def load_import_module(source, **options):
     yield importlib.import_module(source)
+
+
+@data_source_loader("jira")
+@contextlib.contextmanager
+def load_jira(source, auth='', query='', **options):
+    connection = jira.JIRA(source, token_auth=auth)
+    issues = connection.search_issues(parse.unquote(query))
+    for item in issues:
+        item.fields.comment = connection.comments(item)
+    yield issues
+
+
+@data_source_loader("jama")
+@contextlib.contextmanager
+def load_jama(source, auth='', project='', query='', **options):
+    creds = auth.split()
+    yield jama_export.snapshot(source, (creds[0], creds[1]), project, query)

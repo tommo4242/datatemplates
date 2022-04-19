@@ -22,6 +22,8 @@ for Sphinx to render as part of its output.
    import-module
    csv
    dbm
+   jira
+   jama
    inline
    multiple-sources
    legacy
