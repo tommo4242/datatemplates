@@ -1,0 +1,42 @@
+.. -*- mode: rst -*-
+
+.. role:: raw-html(raw)
+   :format: html
+
+Static Heading
+--------------
+
+Raw data
+~~~~~~~~~
+
+{{ data }}
+
+Individual Items
+~~~~~~~~~~~~~~~~
+
+- Issue: {{ data[0].documentKey }}
+- Creator: {{ data[0].createdBy.username }}
+- Last editor: {{ data[0].modifiedBy.username }}
+- Summary: {{ data[0].fld('name') }}
+- Description: :raw-html:`{{ data[0].fld('description') }}`
+
+List of Items
+~~~~~~~~~~~~~
+
+{% for item in data %}
+- {{ item.documentKey }} {{ item.fld('name')}}
+{% endfor %}
+
+Nested List Table
+~~~~~~~~~~~~~~~~~
+
+Rendering a table from a list of nested sequences using hard-coded
+headers. Not really applicable for jama items...
+
+
+Mapping Series Table
+~~~~~~~~~~~~~~~~~~~~
+
+Rendering a table from a list of nested dictionaries using dynamic
+headers.
+

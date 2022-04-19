@@ -1,0 +1,42 @@
+.. -*- mode: rst -*-
+
+Static Heading
+--------------
+
+Raw data
+~~~~~~~~~
+
+{{ data }}
+
+Individual Items
+~~~~~~~~~~~~~~~~
+
+- Issue: {{ data[0].key }}
+- Reporter: {{ data[0].fields.reporter.displayName }}
+- Summary: {{ data[0].fields.summary }}
+- Description: {{ data[0].fields.description }}
+- Labels: {{ data[2].fields.labels }}
+- Comment author: {{ data[2].fields.comment[0].author.displayName }}
+- Comment date: {{ data[2].fields.comment[0].created }}
+- Comment body: {{ data[2].fields.comment[0].body }}
+
+List of Items
+~~~~~~~~~~~~~
+
+{% for item in data %}
+- {{ item.key }}
+{% endfor %}
+
+Nested List Table
+~~~~~~~~~~~~~~~~~
+
+Rendering a table from a list of nested sequences using hard-coded
+headers. Not really applicable for jira issues...
+
+
+Mapping Series Table
+~~~~~~~~~~~~~~~~~~~~
+
+Rendering a table from a list of nested dictionaries using dynamic
+headers.
+
