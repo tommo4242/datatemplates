@@ -31,7 +31,7 @@ class JamaProject:
     pick_lists = None
     pick_lists_by_id = None
     pick_lists_options = None
-    users = None
+    users_by_id = dict()
     releases = None
 
     instance_item_types = None
@@ -149,7 +149,9 @@ class JamaProject:
         return self.pick_lists
 
     def get_user_by_id(self, user_id):
-        return self.client.get_user(user_id)
+        if self.users_by_id.get(user_id, None) is None:
+            self.users_by_id[user_id] = self.client.get_user(user_id)
+        return self.users_by_id[user_id]
 
     def get_items_workflow_transition_options(self, item_id):
         workflow_transition_options = \
